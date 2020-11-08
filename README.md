@@ -35,3 +35,5 @@ Missing details.
 * When validating the final created event, if the even is down and not visible,
   then the test will fail. I need to add a work around like swiping to reach the
   element and verify it.
+* as of now only passing the hr of duration from gherkin, the code to add both hr
+  minutes are already implemented

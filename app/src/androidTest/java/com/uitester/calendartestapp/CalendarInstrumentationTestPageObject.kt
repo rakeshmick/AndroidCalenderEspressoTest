@@ -76,10 +76,11 @@ class CalendarInstrumentationTestPageObject {
         //get the current start time to calculate end time
         val startDate = fixMeetingTimePage.startTime.text
         // format and get the hrs and min to calculate end time
-        val times = startDate.split(" ").indexOf(0).toString().split(":")
-
+        val time_aa = startDate.split(" ")
+        val times =time_aa[0].toString().split(":")
+        val am_pm=time_aa[1].toString()
         val dateString =
-            fixMeetingTimePage.manageTimeinHHMMaaFormat(times.indexOf(0), times.indexOf(1), 10, 5)
+            fixMeetingTimePage.manageTimeinHHMMaaFormat(times[0].toInt(), times[1].toInt(),time_aa[1], 10, 5)
 
 
         fixMeetingTimePage.endTime.text = dateString

@@ -1,6 +1,7 @@
 package pageObjects
 
 import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiSelector
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -39,6 +40,13 @@ class FixMeetingTimePage(var device: UiDevice) {
 
     val minuteSelector = device.findObject(
         UiSelector().resourceId("android:id/input_minute")
+    )
+
+    val amSelector = device.findObject(
+        UiSelector().resourceId("android:id/am_label")
+    )
+    val pmSelector = device.findObject(
+        UiSelector().resourceId("android:id/pm_label")
     )
 
     val endTime = device.findObject(
@@ -85,21 +93,26 @@ class FixMeetingTimePage(var device: UiDevice) {
     }
 
 
-    fun setEndTime(inputHr: Int, inputMin: Int) {
+    fun setEndTime(inputHr: Int, inputMin: Int, am_pm: String) {
 
 
         endTime.click()
         toggleSelector.click()
         hourSelector.text = inputHr.toString()
         minuteSelector.text = inputMin.toString()
+        getAM_PMselector(am_pm)?.click()
         saveButton.click()
     }
 
-    fun manageTimeinHHMMaaFormat(hr: Int, min: Int, hrsToAdd: Int, minToAdd: Int): String {
+    fun manageTimeinHHMMaaFormat(hr: Int, min: Int,aa: String, hrsToAdd: Int, minToAdd: Int): String {
         val dateFormat: DateFormat = SimpleDateFormat("hh.mm aa")
         val cal = Calendar.getInstance();
         cal.set(Calendar.HOUR, hr)
         cal.set(Calendar.MINUTE, min)
+        when(aa){
+            "am","AM"-> cal[Calendar.AM_PM] = Calendar.AM
+            "pm","PM"-> cal[Calendar.AM_PM] = Calendar.PM
+        }
         cal.add(Calendar.HOUR, hrsToAdd)
         cal.add(Calendar.MINUTE, minToAdd)
         val dateString = dateFormat.format(cal.time).toString()
@@ -110,5 +123,13 @@ class FixMeetingTimePage(var device: UiDevice) {
 
     fun saveAllConfigurations() {
         finalSaveButton.click()
+    }
+
+    fun getAM_PMselector(am_pm: String): UiObject? {
+        if(am_pm.equals("am"))
+            return amSelector
+        else if (am_pm.equals("pm"))
+            return pmSelector
+        else return null
     }
 }

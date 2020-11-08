@@ -102,21 +102,28 @@ class StepDefs {
         // format and get the hrs and min to calculate end time
         val firstSplit = startDate.split(" ")[0]
 
-        val times = firstSplit.toString().split(":")
+       // val times = firstSplit.toString().split(":")
+
+        val time_aa = startDate.split(" ")
+        val times =time_aa[0].toString().split(":")
+        val am_pm=time_aa[1].toString()
+      /*  val dateString =
+            fixMeetingTimePage.manageTimeinHHMMaaFormat(times[0].toInt(), times[1].toInt(),time_aa[1], 10, 5)
+*/
 
         val dateString =
             fixMeetingTimePage.manageTimeinHHMMaaFormat(
                 times[0].toInt(),
                 times[1].toInt(),
+                time_aa[1],
                 hrsMinutes.toInt(),
                 5
             )
 
-        val lastTimefirstSplit = dateString.split(" ")[0]
-
-        val lastTimetimes = lastTimefirstSplit.toString().split(".")
+        val lastTimeSplit = dateString.split(" ")
+        val lastTimetimes = lastTimeSplit[0].toString().split(".")
         //fixMeetingTimePage.endTime.text = dateString
-        fixMeetingTimePage.setEndTime(lastTimetimes[0].toInt(), lastTimetimes[1].toInt())
+        fixMeetingTimePage.setEndTime(lastTimetimes[0].toInt(), lastTimetimes[1].toInt(),lastTimeSplit[1])
         finalTime = fixMeetingTimePage.endTime.text
 
     }

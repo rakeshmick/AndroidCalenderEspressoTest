@@ -7,84 +7,76 @@ import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.util.*
 
-class FixMeetingTimePage(var device: UiDevice){
-
-
+class FixMeetingTimePage(var device: UiDevice) {
 
 
     val startDatePicker = device.findObject(
-            UiSelector().resourceId("com.google.android.calendar:id/start_date")
+        UiSelector().resourceId("com.google.android.calendar:id/start_date")
     )
-
-
 
 
     val dateHeader = device.findObject(
-            UiSelector().resourceId("android:id/date_picker_header_date")
+        UiSelector().resourceId("android:id/date_picker_header_date")
     )
 
     val saveButton = device.findObject(
-            UiSelector().resourceId("android:id/button1")
+        UiSelector().resourceId("android:id/button1")
     )
 
     val startTime = device.findObject(
-            UiSelector().resourceId("com.google.android.calendar:id/start_time")
+        UiSelector().resourceId("com.google.android.calendar:id/start_time")
     )
 
 
     val toggleSelector = device.findObject(
-            UiSelector().resourceId("android:id/toggle_mode")
+        UiSelector().resourceId("android:id/toggle_mode")
     )
-
-
 
     val hourSelector = device.findObject(
-            UiSelector().resourceId("android:id/input_hour")
+        UiSelector().resourceId("android:id/input_hour")
     )
-
 
 
     val minuteSelector = device.findObject(
-            UiSelector().resourceId("android:id/input_minute")
+        UiSelector().resourceId("android:id/input_minute")
     )
 
     val endTime = device.findObject(
-            UiSelector().resourceId("com.google.android.calendar:id/end_time")
+        UiSelector().resourceId("com.google.android.calendar:id/end_time")
     )
 
     val finalSaveButton = device.findObject(
-            UiSelector().resourceId("com.google.android.calendar:id/save")
+        UiSelector().resourceId("com.google.android.calendar:id/save")
     )
 
 
-    fun getStartDate():String{
+    fun getStartDate(): String {
         startDatePicker.click()
-        val dateTxt= dateHeader.text;
+        val dateTxt = dateHeader.text;
         saveButton.click()
         return dateTxt
     }
 
-    fun picADayWhichIsNot(day: String){
-        val d=day.subSequence(0,3)
+    fun picADayWhichIsNot(day: String) {
+        val d = day.subSequence(0, 3)
         val startStringFull = getStartDate()
-        val startDate = startStringFull.subSequence(0,3)
+        val startDate = startStringFull.subSequence(0, 3)
         startDatePicker.click()
-        if(!startDate.equals(d))
-        {  saveButton.click()
-            return}
-            else
-        {
-            val da =startStringFull.substring(startStringFull.length-2,startStringFull.length)
-            val newDate= da.trim().toInt()+1
+        if (!startDate.equals(d)) {
+            saveButton.click()
+            return
+        } else {
+            val da = startStringFull.substring(startStringFull.length - 2, startStringFull.length)
+            val newDate = da.trim().toInt() + 1
             device.findObject(
-                    UiSelector().descriptionContains(newDate.toString() +" November 2020")
+                UiSelector().descriptionContains(newDate.toString() + " November 2020")
             ).click()
         }
         saveButton.click()
 
     }
 
-    fun setStartTime(inputHr: Int,  inputMin:Int){
+    fun setStartTime(inputHr: Int, inputMin: Int) {
         startTime.click()
         toggleSelector.click()
         hourSelector.text = inputHr.toString()
@@ -93,8 +85,7 @@ class FixMeetingTimePage(var device: UiDevice){
     }
 
 
-
-    fun setEndTime(inputHr: Int,  inputMin:Int){
+    fun setEndTime(inputHr: Int, inputMin: Int) {
 
 
         endTime.click()
@@ -104,20 +95,20 @@ class FixMeetingTimePage(var device: UiDevice){
         saveButton.click()
     }
 
-    fun manageTimeinHHMMaaFormat(hr:Int, min:Int,hrsToAdd:Int,minToAdd:Int):String{
+    fun manageTimeinHHMMaaFormat(hr: Int, min: Int, hrsToAdd: Int, minToAdd: Int): String {
         val dateFormat: DateFormat = SimpleDateFormat("hh.mm aa")
         val cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR,hr)
-        cal.set(Calendar.MINUTE,min)
-        cal.add(Calendar.HOUR,hrsToAdd)
-        cal.add(Calendar.MINUTE,minToAdd)
+        cal.set(Calendar.HOUR, hr)
+        cal.set(Calendar.MINUTE, min)
+        cal.add(Calendar.HOUR, hrsToAdd)
+        cal.add(Calendar.MINUTE, minToAdd)
         val dateString = dateFormat.format(cal.time).toString()
         println("Current time in AM/PM: $dateString")
         return dateString
     }
 
 
-    fun saveAllConfigurations(){
+    fun saveAllConfigurations() {
         finalSaveButton.click()
     }
 }

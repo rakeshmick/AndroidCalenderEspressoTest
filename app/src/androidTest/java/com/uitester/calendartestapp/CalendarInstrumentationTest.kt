@@ -94,7 +94,7 @@ class CalendarInstrumentationTest {
         val doNotRepeat = device.findObject(
             UiSelector().resourceId("com.google.android.calendar:id/recurrence_spinner")
         )
-        val txtSelector =doNotRepeat.getChild(
+        val txtSelector = doNotRepeat.getChild(
             UiSelector().resourceId("com.google.android.calendar:id/text")
         )
 
@@ -104,16 +104,7 @@ class CalendarInstrumentationTest {
         val addTitleEditText = device.findObject(
             UiSelector().resourceId("com.google.android.calendar:id/input")
         )
-            addTitleEditText.text="Meeting"
-
-      /*  val addTitleEditBox = device.findObject(
-            UiSelector().className(EditText::class.java)
-                .text("Add title")
-        )
-
-        addTitleEditBox.text = "Daily standup meeting"*/
-
-
+        addTitleEditText.text = "Meeting"
 
 
         val startDatePicker = device.findObject(
@@ -122,20 +113,19 @@ class CalendarInstrumentationTest {
         startDatePicker.click()
 
 
-
         val dateHeader = device.findObject(
             UiSelector().resourceId("android:id/date_picker_header_date")
         )
-        val dateTxt= dateHeader.text;
+        val dateTxt = dateHeader.text;
 
         println("the header is " + dateTxt)
 
-       /* val saveButton = device.findObject(
-            UiSelector().className(Button::class.java)
-                .text("Save")
-        )
+        /* val saveButton = device.findObject(
+             UiSelector().className(Button::class.java)
+                 .text("Save")
+         )
 
-        saveButton.click()*/
+         saveButton.click()*/
 
         val saveButton = device.findObject(
             UiSelector().resourceId("android:id/button1")
@@ -153,23 +143,18 @@ class CalendarInstrumentationTest {
         toggleSelector.click()
 
 
-
-
-
         val hourSelector = device.findObject(
             UiSelector().resourceId("android:id/input_hour")
         )
-        var inputhr= hourSelector.text
-        hourSelector.text=inputhr
-
+        var inputhr = hourSelector.text
+        hourSelector.text = inputhr
 
 
         val minuteSelector = device.findObject(
             UiSelector().resourceId("android:id/input_minute")
         )
-        val inputMin=minuteSelector.text
-        minuteSelector.text=inputMin
-
+        val inputMin = minuteSelector.text
+        minuteSelector.text = inputMin
 
 
         val endTime = device.findObject(
@@ -179,20 +164,13 @@ class CalendarInstrumentationTest {
 
         toggleSelector.click()
 
-       /* val hourSelector = device.findObject(
-            UiSelector().resourceId("android:id/hours")
-        )*/
-        hourSelector.text="10"
 
-        /*val minuteSelector = device.findObject(
-            UiSelector().resourceId("android:id/minutes")
-        )*/
+        hourSelector.text = "10"
 
-        minuteSelector.text="30"
+
+        minuteSelector.text = "30"
 
         saveButton.click()
-
-
 
 
         val finalSaveButton = device.findObject(
@@ -203,7 +181,7 @@ class CalendarInstrumentationTest {
         val hamburgerMenu = device.findObject(
             UiSelector().descriptionContains("Show Calendar List and Settings drawer")
         )
-                hamburgerMenu.click()
+        hamburgerMenu.click()
 
         val frame = device.findObject(
             UiSelector().resourceId("com.google.android.calendar:id/drawer_list")

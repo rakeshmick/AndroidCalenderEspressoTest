@@ -7,11 +7,11 @@ class MainPage(var device: UiDevice) {
 
 
     val fabButton = device.findObject(
-            UiSelector().resourceId("com.google.android.calendar:id/floating_action_button")
+        UiSelector().resourceId("com.google.android.calendar:id/floating_action_button")
     )
 
     val eventButton = device.findObject(
-            UiSelector().resourceId("com.google.android.calendar:id/speed_dial_event_container")
+        UiSelector().resourceId("com.google.android.calendar:id/speed_dial_event_container")
     )
 
 

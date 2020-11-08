@@ -37,14 +37,15 @@ class CalendarInstrumentationTestPageObject {
         val launcherPackage: String = device.launcherPackageName
         assertThat(launcherPackage, notNullValue())
         device.wait(
-                Until.hasObject(By.pkg(launcherPackage).depth(0)),
-                LAUNCH_TIMEOUT
+            Until.hasObject(By.pkg(launcherPackage).depth(0)),
+            LAUNCH_TIMEOUT
         )
 
         // Launch the app
         val context = ApplicationProvider.getApplicationContext<Context>()
         val intent = context.packageManager.getLaunchIntentForPackage(
-                CALENDAR_APP_PACKAGE).apply {
+            CALENDAR_APP_PACKAGE
+        ).apply {
             // Clear out any previous instances
             this?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
@@ -52,8 +53,8 @@ class CalendarInstrumentationTestPageObject {
 
         // Wait for the app to appear
         device.wait(
-                Until.hasObject(By.pkg(CALENDAR_APP_PACKAGE).depth(0)),
-                LAUNCH_TIMEOUT
+            Until.hasObject(By.pkg(CALENDAR_APP_PACKAGE).depth(0)),
+            LAUNCH_TIMEOUT
         )
     }
 
@@ -78,7 +79,7 @@ class CalendarInstrumentationTestPageObject {
         val times = startDate.split(" ").indexOf(0).toString().split(":")
 
         val dateString =
-                fixMeetingTimePage.manageTimeinHHMMaaFormat(times.indexOf(0), times.indexOf(1), 10, 5)
+            fixMeetingTimePage.manageTimeinHHMMaaFormat(times.indexOf(0), times.indexOf(1), 10, 5)
 
 
         fixMeetingTimePage.endTime.text = dateString
@@ -90,9 +91,12 @@ class CalendarInstrumentationTestPageObject {
         HamburgerMenu(device).selectWeekView()
 
         val createdMeeting = device.findObject(
-                UiSelector().descriptionContains(startDate + " – " + finalTime + ": Recurring-Team Catch Up")
+            UiSelector().descriptionContains(startDate + " – " + finalTime + ": Recurring-Team Catch Up")
         )
-        assertThat(createdMeeting.contentDescription, containsString(startDate + " – " + finalTime + ": Recurring-Team Catch Up"))
+        assertThat(
+            createdMeeting.contentDescription,
+            containsString(startDate + " – " + finalTime + ": Recurring-Team Catch Up")
+        )
 
 
     }

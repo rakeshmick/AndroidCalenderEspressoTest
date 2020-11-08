@@ -12,5 +12,5 @@ Feature: Create an event with outline
 
  Examples:
     |day|hours|
-    |Friday| 3|
+    |Friday| 1|
     |Saturday | 5 |
